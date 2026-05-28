@@ -1,0 +1,133 @@
+{
+  "event_id": "6d8d9d0f-9706-4b06-87a9-007228e471fa",
+  "request_id": "reflector-cxr-001",
+  "tenant_id": "test",
+  "site_id": null,
+  "decision": "CRITICAL_FAIL",
+  "expected_route": "LLM_PATH",
+  "actual_route": "FAST_PATH",
+  "expected_scope_key": "DX:CHEST:GENERAL_COMPLEX",
+  "actual_scope_key": "DX:CHEST:PNEUMOTHORAX_SIMPLE",
+  "impression_text": null,
+  "issues_json": [
+    {
+      "code": "BAD_ROUTE",
+      "evidence": {
+        "actual_route": "FAST_PATH",
+        "actual_scope_key": "DX:CHEST:PNEUMOTHORAX_SIMPLE",
+        "expected_route": "LLM_PATH",
+        "expected_scope_key": "DX:CHEST:GENERAL_COMPLEX",
+        "reasons": [
+          "bilateral pneumothorax",
+          "severe pneumothorax",
+          "tension physiology mentioned",
+          "large pneumothorax mentioned"
+        ]
+      },
+      "message": "Expected LLM_PATH but Generator used FAST_PATH.",
+      "severity": "critical"
+    },
+    {
+      "code": "MISSING_BILATERAL_PNEUMOTHORAX",
+      "evidence": null,
+      "message": "Bilateral pneumothorax is present but impression does not mention bilateral.",
+      "severity": "critical"
+    },
+    {
+      "code": "TENSION_PHYSIOLOGY_NOT_REFLECTED",
+      "evidence": null,
+      "message": "Source text mentions tension physiology but impression does not reflect it.",
+      "severity": "critical"
+    }
+  ],
+  "input_payload_json": {
+    "actual_route": "FAST_PATH",
+    "actual_scope_key": "DX:CHEST:PNEUMOTHORAX_SIMPLE",
+    "case": {
+      "accession_number": null,
+      "clinical_indication": null,
+      "comparison": null,
+      "exam": {
+        "body_part": "CHEST",
+        "laterality": null,
+        "modality": "DX",
+        "procedure_code": null
+      },
+      "history": null,
+      "patient": null,
+      "study_instance_uid": null
+    },
+    "decision": "CRITICAL_FAIL",
+    "expected_route": "LLM_PATH",
+    "expected_scope_key": "DX:CHEST:GENERAL_COMPLEX",
+    "generator_response": {
+      "case_ref": null,
+      "output": {
+        "critical_results": null,
+        "impression_structured": {},
+        "impression_text": "1. Severe right pneumothorax."
+      },
+      "provenance": {
+        "playbook_id": null,
+        "playbook_version": null,
+        "retrieved_items": null,
+        "route": "FAST_PATH",
+        "scope_key": "DX:CHEST:PNEUMOTHORAX_SIMPLE"
+      },
+      "quality": null,
+      "request_id": "gen-1",
+      "trace": null
+    },
+    "impression_text": "1. Severe right pneumothorax.",
+    "issues": [
+      {
+        "code": "BAD_ROUTE",
+        "evidence": {
+          "actual_route": "FAST_PATH",
+          "actual_scope_key": "DX:CHEST:PNEUMOTHORAX_SIMPLE",
+          "expected_route": "LLM_PATH",
+          "expected_scope_key": "DX:CHEST:GENERAL_COMPLEX",
+          "reasons": [
+            "bilateral pneumothorax",
+            "severe pneumothorax",
+            "tension physiology mentioned",
+            "large pneumothorax mentioned"
+          ]
+        },
+        "message": "Expected LLM_PATH but Generator used FAST_PATH.",
+        "severity": "critical"
+      },
+      {
+        "code": "MISSING_BILATERAL_PNEUMOTHORAX",
+        "evidence": null,
+        "message": "Bilateral pneumothorax is present but impression does not mention bilateral.",
+        "severity": "critical"
+      },
+      {
+        "code": "TENSION_PHYSIOLOGY_NOT_REFLECTED",
+        "evidence": null,
+        "message": "Source text mentions tension physiology but impression does not reflect it.",
+        "severity": "critical"
+      }
+    ],
+    "latency_ms": 1011.56,
+    "request_id": "reflector-cxr-001",
+    "reward_signal": {
+      "labels": [
+        "BAD_ROUTE",
+        "MISSING_BILATERAL_PNEUMOTHORAX",
+        "TENSION_PHYSIOLOGY_NOT_REFLECTED"
+      ],
+      "reason": "CRITICAL_FAIL: 3 issue(s), 3 critical.",
+      "score": 0.1,
+      "send_to_curator": true
+    },
+    "site_id": null,
+    "tenant_id": "test",
+    "timestamp": "2026-05-08T06:30:43.286554+00:00"
+  },
+  "has_embedding": true,
+  "generated_impression": null,
+  "final_impression": "1. Severe right pneumothorax.",
+  "human_impression": "1. Severe right pneumothorax with bilateral involvement and tension physiology."
+}
